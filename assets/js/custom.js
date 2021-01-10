@@ -18,16 +18,20 @@ depositButton.addEventListener('click',function(){
 
     const depositNumber = getInputNumber("depositAmount");
    
-   const currentDeposit = document.getElementById("currentDeposit").innerText;
-
-   const currentDepositNumber = parseFloat(currentDeposit);
-   const totalDeposit = depositNumber + currentDepositNumber; 
-
-   document.getElementById("currentDeposit").innerText = totalDeposit;
+    updateSpanText("currentDeposit",depositNumber);
+    updateSpanText("currentBalance",depositNumber);
+    
    document.getElementById("depositAmount").value='';
-   
 
 });
+function updateSpanText(id,depositNumber){ 
+    const currentBalance = document.getElementById(id).innerText;
+
+    const currentBalanceNumber = parseFloat(currentBalance);
+
+    const totalBalance = depositNumber + currentBalanceNumber;
+    document.getElementById(id).innerText = totalBalance;
+}
 
 // Widthdraw button handler 
 
@@ -35,7 +39,10 @@ depositButton.addEventListener('click',function(){
 
     withdrawButton.addEventListener('click',function(){
         const widthdrawNumber = getInputNumber("withdrawAmount");
-        console.log(widthdrawNumber);
+        // console.log(widthdrawNumber);
+        updateSpanText("currentWidthdraw", widthdrawNumber);
+        updateSpanText("currentBalance", -1 * widthdrawNumber);
+        document.getElementById("withdrawAmount").value="";
     });
 
     function getInputNumber(id){
@@ -43,3 +50,6 @@ depositButton.addEventListener('click',function(){
         const widthdrawNumber = parseFloat(withdrawAmount);
         return widthdrawNumber;
     }
+
+
+
